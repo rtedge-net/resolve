@@ -131,7 +131,7 @@ https://resolve.deno.dev/?ip
 }
 ```
 
-### `ip` `=` `o`<br><sup>outbound/service IP<br><sup>service: Deno Deploy
+### `ip` `=` `o`<br><sup>outbound/service IP<br><sup>service: [Deno Deploy](https://deno.com/deploy)
 
 ```URL
 https://resolve.deno.dev/?ip=o
