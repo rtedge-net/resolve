@@ -1,4 +1,4 @@
-# *resolve* – edge-deployed DNS resolver powered by [Deno.resolveDns](https://deno.land/api?s=Deno.resolveDns)
+# *resolve* – edge-deployed DNS web service powered by [Deno.resolveDns](https://deno.land/api?s=Deno.resolveDns)
 
 ## Deploy your own instance!
 
@@ -66,6 +66,8 @@ https://resolve.deno.dev/?s&x=1.1.1.1,2606:4700:4700::1111&a,aaaa=one.one.one.on
   }
 }
 ```
+
+
 
 ---
 
@@ -152,6 +154,8 @@ https://resolve.deno.dev/?ip=o
 }
 ```
 
+
+
 ---
 
 ## Contained Errors
@@ -180,6 +184,8 @@ https://resolve.deno.dev/?ns=x,.&ip=x,1.1.1.1
 }
 ```
 
+
+
 ---
 
 ## Exposed Headers
@@ -207,6 +213,8 @@ await fetch(`https://resolve.deno.dev/?s&a=deno.com&_={"nameServer":{"ipAddr":"1
 ```JS
                           [ 4,                                         {A:{…}} ]
 ```
+
+
 
 ---
 ---
