@@ -189,7 +189,7 @@ https://resolve.deno.dev/?ns=x,.&ip=x,1.1.1.1&a=x,apple.com
 
 ## [Exposed Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers)
 
-`_`, `IP`, `IP-X`, `DUR`, [`SERVER`](https://deno.com/deploy/docs/regions), [`SERVER-TIMING`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Server-Timing)<br>
+[`_`](#specify-options-__--denoresolvednsoptions), [`IP`](#ipinboundyour-ipsame-as-ip--i), `IP-X`, `DUR`, [`SERVER`](https://deno.com/deploy/docs/regions), [`SERVER-TIMING`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Server-Timing)<br>
 are exposed for out-of-band consumption.
 
 ```HTTP
