@@ -22,16 +22,16 @@ const PR =  'rejected';
 
 
 const resolve = async (t, q, ...O) => {
-  try       { return await (t === 'AS' ? ip.info(`AS${q.replace(/^ASN?/i, '')}`) : t === 'IP' ? ip.info(q).then(o => (delete o.ip, o)) : Deno.resolveDns(q, t, ...O)); } 
+  try       { return await (t === 'AS' ? ip.info(`AS${q.replace(/^ASN?/i, '')}`) : t === 'IP' ? q : Deno.resolveDns(q, t, ...O)); } 
   catch (e) { return { error: e.message } }
 };
 const rextend = async (t, q, ...O) => {
   const o = await resolve(t, q, ...O);
-  return ip.type.has(t) && o.map ? (await Promise.all(o.map(ip.info))).reduce((x, { ip, ...O }) => (x[ip] = O, x), {}) : o;
+  return ip.type.has(t) && o.map ? (await Promise.all(o.map(ip.info))).reduce((x, { ip, ...O }) => (x[ip] = O, x), {}) : t === 'IP' ? ip.info(o) : o;
 };
 
 const ip = { v4: q => !q.includes(':'),
-  type: new Set([ 'A', 'AAAA' ]),
+  type: new Set([ 'A', 'AAAA', 'IP' ]),
   info:    q => undefined,
   reverse: q => ip.v4(q) ? q.split('.').reverse().join('.') : ip6.ptr(q, 0),
   ptr:     q => `${ip.reverse(q)}.${ip.v4(q) ? 'in-addr' : 'ip6'}.arpa.`
