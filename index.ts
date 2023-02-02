@@ -38,6 +38,8 @@ const ip = { v4: q => !q.includes(':'),
 };
 ip.info.user = q => fetch(`https://ipinfo.io/${q}?${new URLSearchParams({ token: Deno.env.get('IPINFO_TOKEN') })}`).then(f => f.json())                                .catch(e => ({ ip: q, error: e.message }));
 ip.info.curl = q => fetch(`https://ipinfo.io/${q}`,                   { headers: { "user-agent": "curl/7.81.0" } }).then(f => f.json()).then(o => (delete o.readme, o)).catch(e => ({ ip: q, error: e.message }));
+ip.info.user.user = ip.info.user; ip.info.curl.user = ip.info.user;
+ip.info.user.curl = ip.info.curl; ip.info.curl.curl = ip.info.curl;
 
 const cartesian = (...a) => a.reduce((a, b) => a.flatMap(d => b.map(e => [d, e].flat())));
 Object.prototype.sort = function({ K = true, V = false } = {}) { const C = 0; if (C) console.warn('Object.sort()', 0, { K, V }, this);
