@@ -9,7 +9,7 @@ const TJ = { [CT]: `text/javascript;charset=utf-8` };
 const AJ = { [CT]: `application/json;charset=utf-8` };
 const         ACXH = `access-control-expose-headers`;
 const         ACAO = `access-control-allow-origin`;
-const XH = { [ACXH]: '_, IP, IP-X, DUR, SERVER, SERVER-TIMING' };
+const XH = { [ACXH]: '_, ip, ip-x, dur, server, server-timing' };
 const AO = { [ACAO]: '*' };
 const NS = { 'cache-control': 'no-store' };
 const HSTS = { "strict-transport-security": "max-age=31536000; includeSubDomains; preload" };
