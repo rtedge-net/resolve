@@ -95,17 +95,18 @@ It takes [1 line to use/replace `ipinfo.io`](https://github.com/rtedge-net/resol
 https://resolve.deno.dev/?a=deno.com
 ```
 ```JS
-{ "A": { "deno.com": [ "34.120.54.55" ] } } // ← ?a=deno.com&s
-{ "A": { "deno.com": { "34.120.54.55": {    // ← ?a=deno.com  (ipinfo.io) 
-                         "hostname": "55.54.120.34.bc.googleusercontent.com",
-                         "anycast": true,
-                         "city": "Kansas City",
-                         "region": "Missouri",
-                         "country": "US",
-                         "loc": "39.0997,-94.5786",
-                         "org": "AS396982 Google LLC",
-                         "postal": "64106",
-                         "timezone": "America/Chicago" } } } }
+s
+← { "A": { "deno.com": [ "34.120.54.55" ] } } // ← ?a=deno.com&s
+→ { "A": { "deno.com": { "34.120.54.55": {    // ← ?a=deno.com    (ipinfo.io) 
+-                          "hostname": "55.54.120.34.bc.googleusercontent.com",
+                           "anycast": true,
+                           "city": "Kansas City",
+                           "region": "Missouri",
+                           "country": "US",
+                           "loc": "39.0997,-94.5786",
+                           "org": "AS396982 Google LLC",
+                           "postal": "64106",
+                           "timezone": "America/Chicago" } } } }
 ```
 
 ### `ip`<br><sup>inbound/your IP<br><sup>same as `ip` `=` `i`
