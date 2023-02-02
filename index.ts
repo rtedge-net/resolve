@@ -9,7 +9,7 @@ const TJ = { [CT]: `text/javascript;charset=utf-8` };
 const AJ = { [CT]: `application/json;charset=utf-8` };
 const         ACXH = `access-control-expose-headers`;
 const         ACAO = `access-control-allow-origin`;
-const XH = { [ACXH]: 'O, I, NS, X-IP' };
+const XH = { [ACXH]: '_, IP, IP-X, DUR, SERVER-TIMING' };
 const AO = { [ACAO]: '*' };
 const NS = { 'cache-control': 'no-store' };
 const HSTS = { "strict-transport-security": "max-age=31536000; includeSubDomains; preload" };
@@ -50,7 +50,7 @@ Object.prototype.sort = function({ K = true, V = false } = {}) { const C = 0; if
 const sort = x => { try { x?.sort?.(); } catch (e) {} return x; }; // MX records cannot be sorted [{},{}]
 
 const                                     A = new Set([ /* allowed source IPs */ ]);
-serve(async (r: Request, c: ConnInfo) => { console.warn('----------------------------------------------'); console.warn(r.url, c);
+serve(async (r: Request, c: ConnInfo) => { console.warn('----------------------------------------------'); console.warn(r.url, c); const ta = performance.now();
 //const a = c?.remoteAddr?.hostname; if (!A.has(a)) return new Response('403 Forbidden', { status: Status.Forbidden, headers: { ...TP, ...NS, ...AO, ...HSTS } });
   ip.info = ip.info[Deno.env.get('IPINFO_TOKEN') ? 'user' : 'curl'];
   const u = new URL(r.url);
@@ -58,7 +58,7 @@ serve(async (r: Request, c: ConnInfo) => { console.warn('-----------------------
   switch (p) {
   case '/ipinfo.io': return fetch(`https://ipinfo.io/1.1.1.1?${new URLSearchParams({ token: Deno.env.get('IPINFO_TOKEN') })}`);
   }
-  const C = { O: c.localAddr.hostname, I: c.remoteAddr.hostname, "X-IP": "https://ipinfo.io", ...XH };
+  const C = { IP: JS({ i: c.remoteAddr.hostname, o: c.localAddr.hostname }), "IP-X": "https://ipinfo.io", ...XH };
   const q = u.searchParams; //   _               _____________________
   const _ = JP(q.get('_')); // { _ = nameServer: { ipAddr, port = 53 } } https://deno.land/api@latest?s=Deno.ResolveDnsOptions
   const s =    q.get('s') !== null;
@@ -68,10 +68,10 @@ serve(async (r: Request, c: ConnInfo) => { console.warn('-----------------------
   const m = q =>      X[q.toUpperCase()] ?? q;
   const Q = [...q.entries()].flatMap(([ T, Q ]) => cartesian(T.split(','), Q.split(',')).map(([ t, q ]) => [ t.toUpperCase(), m(q) ])).map(([ t, q ]) => [ t === 'X' ? 'PTR' : t, t === 'X' ? ip.ptr(q) : q ]); console.warn(Q, { i, _ });
   if   (Q.length === 0) return Response.redirect('https://apple.com', 308); // obfuscation
-  if   (i)      return new Response(JS(Q, '', '  '), { headers: { NS: JS(_), ...C, ...AJ, ...NS, ...AO, ...HSTS } });
+  if   (i)      return new Response(JS(Q, '', '  '), { headers: { _: JS(_), ...C, ...AJ, ...NS, ...AO, ...HSTS } });
   try {
     const                                  R = await Promise.all(Q.map(async ([ t, q ]) => [ t, [ q, await f(t, q, _ ?? {}).then(sort) ] ]));
-    const                              O = R.reduce((x, [ t, [ q, r ]]) => (x[t] !== undefined ? (x[t][q] = r) : (x[t] = { [q]: r }), x), {});
-    return             new Response(JS(O, '', '  '), { headers: { NS: JS(_), ...C, ...AJ, ...NS, ...AO, ...HSTS } });
-  } catch (e) { return new Response(   e.stack,      { headers: { NS: JS(_), ...C, ...TP, ...NS, ...AO, ...HSTS } }); }
+    const                              O = R.reduce((x, [ t, [ q, r ]]) => (x[t] !== undefined ? (x[t][q] = r) : (x[t] = { [q]: r }), x), {}); C.dur = performance.now() - ta; C['server-timing'] = `total;dur=${C.dur}`;
+    return             new Response(JS(O, '', '  '), { headers: { _: JS(_), ...C, ...AJ, ...NS, ...AO, ...HSTS } });
+  } catch (e) { return new Response(   e.stack,      { headers: { _: JS(_), ...C, ...TP, ...NS, ...AO, ...HSTS } }); }
 });
