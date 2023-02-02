@@ -1,10 +1,9 @@
 # resolveDns
 
-1. copy https://github.com/rtedge-net/resolveDns/blob/main/index.ts
-2. open https://dash.deno.com/new
-3. click `ϟ Play`
-4. paste contents from step 1
-5. save &amp; deploy with <kbd>Ctrl</kbd>+<kbd>S</kbd>
+1. open https://dash.deno.com/new
+2. click `ϟ Play`
+3. paste https://raw.githubusercontent.com/rtedge-net/resolveDns/main/index.ts
+4. save &amp; deploy with <kbd>Ctrl</kbd>+<kbd>S</kbd>
 
 🥳 Congratulations! Your very own [edge-deployed](https://deno.com/deploy/docs/regions) DNS resolver is ready.<br>
 Replace `resolve.deno.dev` with your own `.deno.dev`/custom hostname!
