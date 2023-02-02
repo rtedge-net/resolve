@@ -86,8 +86,8 @@ https://resolve.deno.dev/?s&a=deno.com&_={"nameServer":{"ipAddr":"1.1.1.1"}}
 
 ## Extended Queries (<s>`s`</s> <s>`&`</s>)
 
-Drop **`s`** from the query string to extend `A`, `AAAA`, `IP` results.<br>
-It takes just [1 line to replace `ipinfo.io`](https://github.com/rtedge-net/resolve/blob/3e4bbc8eaa0fe909c07a25d1936e385d544a91c7/index.ts#L39) with a different service!
+Drop **`s`** from the query to extend `A`, `AAAA`, `IP` results.<br>
+It takes [1 line to replace `ipinfo.io`](https://github.com/rtedge-net/resolve/blob/3e4bbc8eaa0fe909c07a25d1936e385d544a91c7/index.ts#L39)!
 
 ### `a`
 
@@ -160,7 +160,7 @@ https://resolve.deno.dev/?ip=o
 
 ## Contained Errors
 
-Errors that occur processing one query does not affect others.
+Errors from one query does not affect others.
 
 ```URL
 https://resolve.deno.dev/?ns=x,.&ip=x,1.1.1.1
@@ -188,9 +188,9 @@ https://resolve.deno.dev/?ns=x,.&ip=x,1.1.1.1
 
 ---
 
-## Exposed Headers
+## [Exposed Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers)
 
-`_`, `IP`, `IP-X`, `DUR`, [`SERVER`](https://deno.com/deploy/docs/regions) and `SERVER_TIMING` are exposed.
+`_`, `IP`, `IP-X`, `DUR`, [`SERVER`](https://deno.com/deploy/docs/regions), `SERVER_TIMING`.
 
 ```HTTP
 access-control-expose-headers: _, IP, IP-X, DUR, SERVER, SERVER-TIMING
@@ -204,7 +204,7 @@ server: deno/gcp-asia-northeast3
 server-timing: total;dur=6
 ```
 
-These can be easily consumed for out-of-band data.
+These can be easily consumed for out-of-band.
 
 ```JS
 await fetch(`https://resolve.deno.dev/?s&a=deno.com&_={"nameServer":{"ipAddr":"1.1.1.1"}}`)
