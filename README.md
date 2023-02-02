@@ -2,7 +2,7 @@
 
 ## Deploy your own instance!
 
-1. open //dash.deno.com/new
+1. open [dash.deno.com/new](//dash.deno.com/new)
 2. click `ϟ Play`
 3. paste [//raw.⋯/index.ts](//raw.githubusercontent.com/rtedge-net/resolve/main/index.ts)
 4. save &amp; deploy with <kbd>Ctrl</kbd>+<kbd>S</kbd>
