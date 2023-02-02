@@ -187,9 +187,11 @@ https://resolve.deno.dev/?ns=x,.&ip=x,1.1.1.1
 `_`, `IP`, `IP-X`, `DUR`, [`SERVER`](https://deno.com/deploy/docs/regions) and `SERVER_TIMING` are exposed.
 
 ```HTTP
-access-control-expose-headers: _, IP, IP-X, DUR, SERVER-TIMING
+access-control-expose-headers: _, IP, IP-X, DUR, SERVER, SERVER-TIMING
+```
+```HTTP
 _: {"nameServer":{"ipAddr":"1.1.1.1"}}
-ip: {"i":"125.130.120.157","o":"34.120.54.55"}
+ip: {"i":"###.###.###.###","o":"34.120.54.55"}
 ip-x: https://ipinfo.io
 dur: 6
 server: deno/gcp-asia-northeast3
@@ -203,7 +205,7 @@ await fetch(`https://resolve.deno.dev/?s&a=deno.com&_={"nameServer":{"ipAddr":"1
   .then(async response => [ response.headers.get('dur'), await response.json() ]);
 ```
 ```JS
-                          [ 4,                                          {A:{…}}]
+                          [ 4,                                         {A:{…}} ]
 ```
 
 ---
