@@ -4,7 +4,7 @@
 
 1. open [dash.deno.com/new](//dash.deno.com/new)
 2. click `ϟ Play`
-3. paste [//raw.⋯/index.ts](//raw.githubusercontent.com/rtedge-net/resolve/main/index.ts)
+3. paste [//raw.…/index.ts](//raw.githubusercontent.com/rtedge-net/resolve/main/index.ts)
 4. save &amp; deploy with <kbd>Ctrl</kbd>+<kbd>S</kbd>
 
 🥳 Congratulations! Your very own [edge-deployed](https://deno.com/deploy/docs/regions) DNS resolver is ready.<br>
@@ -23,7 +23,7 @@ https://resolve.deno.dev?s&a=deno.com&cname=www.apple.com
 }
 ```
 
-### `<type1>` `,` `⋯` `=` `<query1>` `,` `⋯`
+### `<type1>` `,` `…` `=` `<query1>` `,` `…`
 
 ```URL
 https://resolve.deno.dev?s&a,aaaa=deno.com,deno.dev&mx=deno.land
@@ -164,17 +164,73 @@ https://resolve.deno.dev/?ns=x,.&ip=x,1.1.1.1
 {
   "NS": {
     "x": { "error": "no record found for Query { name: Name(\"x.\"), query_type: NS, query_class: IN }" },
-    ".": [ "a.root-servers.net.", ⋯, "m.root-servers.net." ]
+    ".": [ "a.root-servers.net.", …, "m.root-servers.net." ]
   },
   "IP": {
     "x": { "error": { "title": "Wrong ip", "message": "Please provide a valid IP address" }, "status": 404 },
-    "1.1.1.1": { "anycast": true, ⋯, "timezone": "America/Los_Angeles" }
+    "1.1.1.1": { "anycast": true, …, "timezone": "America/Los_Angeles" }
   },
   "A": {
     "x": { "error": "no record found for Query { name: Name(\"x.\"), query_type: A, query_class: IN }" },
     "apple.com": {
-      "17.253.144.10": { "anycast": true, ⋯, "org": "AS714 Apple Inc.", ⋯ }
+      "17.253.144.10": { "anycast": true, …, "org": "AS714 Apple Inc.", … }
     }
   }
 }
 ```
+
+---
+
+## Exposed Headers
+
+`_`, `IP`, `IP-X`, `DUR`, [`SERVER`](https://deno.com/deploy/docs/regions) and `SERVER_TIMING` are exposed.
+
+```HTTP
+access-control-expose-headers: _, IP, IP-X, DUR, SERVER-TIMING
+_: {"nameServer":{"ipAddr":"1.1.1.1"}}
+ip: {"i":"125.130.120.157","o":"34.120.54.55"}
+ip-x: https://ipinfo.io
+dur: 6
+server: deno/gcp-asia-northeast3
+server-timing: total;dur=6
+```
+
+These can be easily consumed for out-of-band data.
+
+```JS
+await fetch(`https://resolve.deno.dev/?s&a=deno.com&_={"nameServer":{"ipAddr":"1.1.1.1"}}`)
+  .then(async response => [ response.headers.get('dur'), await response.json() ]);
+```
+```JS
+                          [ 4,                                          {A:{…}}]
+```
+
+---
+---
+---
+
+## [Deno Deploy](https://deno.com/deploy)
+
+### [Seoul](https://en.wikipedia.org/wiki/Seoul), [South Korea](https://en.wikipedia.org/wiki/South_Korea) tests<br><sup>[`deno/gcp-asia-northeast3`](https://deno.com/deploy/docs/regions)
+
+```JS
+await fetch(`https://resolve.deno.dev/?s&a=deno.com&_={"nameServer":{"ipAddr":"1.1.1.1"}}`)
+  .then(async f => [ f.headers.get('server'), f.headers.get('dur'), await f.json() ])
+```
+
+| `_`                                                  | `dur`  | `A` | DNS service |
+| :-                                                   |    -:  |  -  | :- |
+| `_={"nameServer":{"ipAddr":"1.1.1.1"}}`              |  `4ms` | ✔️ | [Cloudflare](//1.1.1.1/dns/)
+| `_={"nameServer":{"ipAddr":"8.8.8.8"}}`              | `40ms` | ✔️ | [Google Public](//developers.google.com/speed/public-dns/docs/using#addresses)
+| `_={"nameServer":{"ipAddr":"2606:4700:4700::1111"}}` |  `0ms` | ❌ | [Cloudflare](//1.1.1.1/dns/)
+| `_={"nameServer":{"ipAddr":"2001:4860:4860::8888"}}` |  `0ms` | ❌ | [Google Public](//developers.google.com/speed/public-dns/docs/using#addresses)
+
+✔️: `{ A: { "deno.com": [ "34.120.54.55" ]                                                                  } }`<br>
+❌: `{ A: { "deno.com": { "error": "proto error: io error: Cannot assign requested address (os error 99)" } } }`  
+
+### `IPv6` support
+
+| Target                                 | `IPv4` | `IPv6`
+| :-                                     | :-: | :-:
+| Deno (Local)                           | ✔️ | ✔️
+| [Deno Deploy](https://deno.com/deploy) | ✔️ | ❌
