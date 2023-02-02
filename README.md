@@ -1,4 +1,4 @@
-# resolve – edge-deployed DNS resolver powered by [Deno.resolveDns](https://deno.land/api?s=Deno.resolveDns)
+# *resolve* – edge-deployed DNS resolver powered by [Deno.resolveDns](https://deno.land/api?s=Deno.resolveDns)
 
 ## Deploy your own instance!
 
