@@ -190,11 +190,9 @@ https://resolve.deno.dev/?ns=x,.&ip=x,1.1.1.1
 
 ## [Exposed Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers)
 
-`_`, `IP`, `IP-X`, `DUR`, [`SERVER`](https://deno.com/deploy/docs/regions), `SERVER_TIMING`.
+`_`, `IP`, `IP-X`, `DUR`, [`SERVER`](https://deno.com/deploy/docs/regions), [`SERVER-TIMING`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Server-Timing)<br>
+are exposed for out-of-band consumption.
 
-```HTTP
-access-control-expose-headers: _, IP, IP-X, DUR, SERVER, SERVER-TIMING
-```
 ```HTTP
 _: {"nameServer":{"ipAddr":"1.1.1.1"}}
 ip: {"i":"###.###.###.###","o":"34.120.54.55"}
@@ -203,8 +201,6 @@ dur: 6
 server: deno/gcp-asia-northeast3
 server-timing: total;dur=6
 ```
-
-These can be easily consumed for out-of-band.
 
 ```JS
 await fetch(`https://resolve.deno.dev/?s&a=deno.com&_={"nameServer":{"ipAddr":"1.1.1.1"}}`)
