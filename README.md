@@ -50,7 +50,7 @@ https://resolve.deno.dev?s&a,aaaa=deno.com,deno.dev&mx=deno.land
 }
 ```
 
-### `x` `=` `<IP>`
+### `x` `=` `<IP>`<br><sup>[Reverse DNS](https://en.wikipedia.org/wiki/Reverse_DNS_lookup)
 
 ```URL
 https://resolve.deno.dev/?s&x=1.1.1.1,2606:4700:4700::1111&a,aaaa=one.one.one.one
@@ -58,7 +58,8 @@ https://resolve.deno.dev/?s&x=1.1.1.1,2606:4700:4700::1111&a,aaaa=one.one.one.on
 ```json
 {
   "PTR": {
-    "1.1.1.1.in-addr.arpa.": [ "one.one.one.one." ], "1.1.1.1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.7.4.0.0.7.4.6.0.6.2.ip6.arpa.": [ "one.one.one.one." ]
+    "1.1.1.1.in-addr.arpa.": [ "one.one.one.one." ],
+    "1.1.1.1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.7.4.0.0.7.4.6.0.6.2.ip6.arpa.": [ "one.one.one.one." ]
   },
   "A":    { "one.one.one.one": [ "1.0.0.1", "1.1.1.1" ] },
   "AAAA": { "one.one.one.one": [ "2606:4700:4700::1001", "2606:4700:4700::1111" ]
