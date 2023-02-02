@@ -163,7 +163,7 @@ https://resolve.deno.dev/?ip=o
 Errors from one query does not affect others.
 
 ```URL
-https://resolve.deno.dev/?ns=x,.&ip=x,1.1.1.1
+https://resolve.deno.dev/?ns=x,.&ip=x,1.1.1.1&a=x,apple.com
 ```
 ```JS
 {
