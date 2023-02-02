@@ -86,8 +86,8 @@ https://resolve.deno.dev/?s&a=deno.com&_={"nameServer":{"ipAddr":"1.1.1.1"}}
 
 ## Extended Queries (<s>`s`</s> <s>`&`</s>)
 
-Drop **`s`** from the query to extend `A`, `AAAA`, `IP` results.<br>
-It takes [1 line to replace `ipinfo.io`](https://github.com/rtedge-net/resolve/blob/3e4bbc8eaa0fe909c07a25d1936e385d544a91c7/index.ts#L39)!
+Remove **`s`** to extend `A`, `AAAA`, `IP` results.<br>
+It takes [1 line to use/replace `ipinfo.io`](https://github.com/rtedge-net/resolve/blob/3e4bbc8eaa0fe909c07a25d1936e385d544a91c7/index.ts#L39)!
 
 ### `a`
 
