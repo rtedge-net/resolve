@@ -1,8 +1,10 @@
-# resolveDns
+# resolve – edge-deployed DNS resolver powered by [Deno.resolveDns](https://deno.land/api?s=Deno.resolveDns)
+
+## Deploy your own instance!
 
 1. open https://dash.deno.com/new
 2. click `ϟ Play`
-3. paste https://raw.githubusercontent.com/rtedge-net/resolveDns/main/index.ts
+3. paste https://raw.githubusercontent.com/rtedge-net/resolve/main/index.ts
 4. save &amp; deploy with <kbd>Ctrl</kbd>+<kbd>S</kbd>
 
 🥳 Congratulations! Your very own [edge-deployed](https://deno.com/deploy/docs/regions) DNS resolver is ready.<br>
