@@ -42,9 +42,9 @@ https://resolve.deno.dev?s&a,aaaa=deno.com,deno.dev&mx=deno.land
     "deno.land": [
       { "preference": 10, "exchange": "alt3.aspmx.l.google.com." },
       { "preference": 10, "exchange": "alt4.aspmx.l.google.com." },
-      { "preference": 1,  "exchange":      "aspmx.l.google.com." },
-      { "preference": 5,  "exchange": "alt2.aspmx.l.google.com." },
-      { "preference": 5,  "exchange": "alt1.aspmx.l.google.com." }
+      { "preference":  1, "exchange":      "aspmx.l.google.com." },
+      { "preference":  5, "exchange": "alt2.aspmx.l.google.com." },
+      { "preference":  5, "exchange": "alt1.aspmx.l.google.com." }
     ]
   }
 }
