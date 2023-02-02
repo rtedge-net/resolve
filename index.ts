@@ -70,7 +70,7 @@ serve(async (r: Request, c: ConnInfo) => { console.warn('-----------------------
   if   (Q.length === 0) return Response.redirect('https://apple.com', 308); // obfuscation
   if   (i)      return new Response(JS(Q, '', '  '), { headers: { NS: JS(_), ...C, ...AJ, ...NS, ...AO, ...HSTS } });
   try {
-    const                                  R = await Promise.all(Q.map(async ([ t, q ]) => [ t, [ q, await f(t, q, _ ? { nameServer: _ } : {}).then(sort) ] ]));
+    const                                  R = await Promise.all(Q.map(async ([ t, q ]) => [ t, [ q, await f(t, q, _ ?? {}).then(sort) ] ]));
     const                              O = R.reduce((x, [ t, [ q, r ]]) => (x[t] !== undefined ? (x[t][q] = r) : (x[t] = { [q]: r }), x), {});
     return             new Response(JS(O, '', '  '), { headers: { NS: JS(_), ...C, ...AJ, ...NS, ...AO, ...HSTS } });
   } catch (e) { return new Response(   e.stack,      { headers: { NS: JS(_), ...C, ...TP, ...NS, ...AO, ...HSTS } }); }
