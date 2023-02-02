@@ -2,15 +2,15 @@
 
 ## Deploy your own instance!
 
-1. open https://dash.deno.com/new
+1. open //dash.deno.com/new
 2. click `ϟ Play`
-3. paste https://raw.githubusercontent.com/rtedge-net/resolve/main/index.ts
+3. paste [//raw.⋯/index.ts](//raw.githubusercontent.com/rtedge-net/resolve/main/index.ts)
 4. save &amp; deploy with <kbd>Ctrl</kbd>+<kbd>S</kbd>
 
 🥳 Congratulations! Your very own [edge-deployed](https://deno.com/deploy/docs/regions) DNS resolver is ready.<br>
 Replace `resolve.deno.dev` with your own `.deno.dev`/custom hostname!
 
-## Simple DNS Queries (`s` `&`)
+## Simple Queries (`s` `&`)
 
 ### `<type>` `=` `<query>`
 ```URL
@@ -68,10 +68,22 @@ https://resolve.deno.dev/?s&x=1.1.1.1,2606:4700:4700::1111&a,aaaa=one.one.one.on
 
 ---
 
+## Specify Options ([`_`](https://deno.land/api?s=Deno.ResolveDnsOptions))<br><sup><sup>`_` `:` [`Deno.ResolveDnsOptions`](https://deno.land/api?s=Deno.ResolveDnsOptions)
+
+```URL
+https://resolve.deno.dev/?s&a=deno.com&_={"nameServer":{"ipAddr":"1.1.1.1"}}
+```
+```
+{ "A": { "deno.com": [ "34.120.54.55" ] } }
+```
+
+
+
+---
 
 ## Extended Queries (<s>`s`</s> <s>`&`</s>)
 
-Drop `s` from the query string to extend `A`, `AAAA`, `IP` results.<br>
+Drop **`s`** from the query string to extend `A`, `AAAA`, `IP` results.<br>
 It takes just 1 line to replace `ipinfo.io` with a different service!
 
 ### `a`
@@ -134,6 +146,34 @@ https://resolve.deno.dev/?ip=o
       "postal": "64106",
       "region": "Missouri",
       "timezone": "America/Chicago"
+    }
+  }
+}
+```
+
+---
+
+## Contained Errors
+
+Errors that occur processing one query does not affect others.
+
+```URL
+https://resolve.deno.dev/?ns=x,.&ip=x,1.1.1.1
+```
+```JS
+{
+  "NS": {
+    "x": { "error": "no record found for Query { name: Name(\"x.\"), query_type: NS, query_class: IN }" },
+    ".": [ "a.root-servers.net.", ⋯, "m.root-servers.net." ]
+  },
+  "IP": {
+    "x": { "error": { "title": "Wrong ip", "message": "Please provide a valid IP address" }, "status": 404 },
+    "1.1.1.1": { "anycast": true, ⋯, "timezone": "America/Los_Angeles" }
+  },
+  "A": {
+    "x": { "error": "no record found for Query { name: Name(\"x.\"), query_type: A, query_class: IN }" },
+    "apple.com": {
+      "17.253.144.10": { "anycast": true, ⋯, "org": "AS714 Apple Inc.", ⋯ }
     }
   }
 }
