@@ -177,9 +177,7 @@ https://resolve.deno.dev/?ns=x,.&ip=x,1.1.1.1
   },
   "A": {
     "x": { "error": "no record found for Query { name: Name(\"x.\"), query_type: A, query_class: IN }" },
-    "apple.com": {
-      "17.253.144.10": { "anycast": true, …, "org": "AS714 Apple Inc.", … }
-    }
+    "apple.com": { "17.253.144.10": { "anycast": true, …, "org": "AS714 Apple Inc.", … } }
   }
 }
 ```
