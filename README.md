@@ -2,9 +2,9 @@
 
 ## Deploy your own instance!
 
-1. open [dash.deno.com/new](//dash.deno.com/new)
+1. open [dash.deno.com/new](https://dash.deno.com/new)
 2. click `ϟ Play`
-3. paste [//raw.…/index.ts](//raw.githubusercontent.com/rtedge-net/resolve/main/index.ts)
+3. paste [raw.…/index.ts](https://raw.githubusercontent.com/rtedge-net/resolve/main/index.ts)
 4. save &amp; deploy with <kbd>Ctrl</kbd>+<kbd>S</kbd>
 
 🥳 Congratulations! Your very own [edge-deployed](https://deno.com/deploy/docs/regions) DNS resolver is ready.<br>
@@ -221,10 +221,10 @@ await fetch(`https://resolve.deno.dev/?s&a=deno.com&_={"nameServer":{"ipAddr":"1
 
 | `_`                                                  | `dur`  | `A` | DNS service |
 | :-                                                   |    -:  |  -  | :- |
-| `_={"nameServer":{"ipAddr":"1.1.1.1"}}`              |  `4ms` | ✔️ | [Cloudflare](//1.1.1.1/dns/)
-| `_={"nameServer":{"ipAddr":"8.8.8.8"}}`              | `40ms` | ✔️ | [Google Public](//developers.google.com/speed/public-dns/docs/using#addresses)
-| `_={"nameServer":{"ipAddr":"2606:4700:4700::1111"}}` |  `0ms` | ❌ | [Cloudflare](//1.1.1.1/dns/)
-| `_={"nameServer":{"ipAddr":"2001:4860:4860::8888"}}` |  `0ms` | ❌ | [Google Public](//developers.google.com/speed/public-dns/docs/using#addresses)
+| `_={"nameServer":{"ipAddr":"1.1.1.1"}}`              |  `4ms` | ✔️ | [Cloudflare](https://1.1.1.1/dns/)
+| `_={"nameServer":{"ipAddr":"8.8.8.8"}}`              | `40ms` | ✔️ | [Google Public](https://developers.google.com/speed/public-dns/docs/using#addresses)
+| `_={"nameServer":{"ipAddr":"2606:4700:4700::1111"}}` |  `0ms` | ❌ | [Cloudflare](https://1.1.1.1/dns/)
+| `_={"nameServer":{"ipAddr":"2001:4860:4860::8888"}}` |  `0ms` | ❌ | [Google Public](https://developers.google.com/speed/public-dns/docs/using#addresses)
 
 ✔️: `{ A: { "deno.com": [ "34.120.54.55" ]                                                                  } }`<br>
 ❌: `{ A: { "deno.com": { "error": "proto error: io error: Cannot assign requested address (os error 99)" } } }`  
