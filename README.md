@@ -8,13 +8,13 @@
 4. save &amp; deploy with <kbd>Ctrl</kbd>+<kbd>S</kbd>
 
 🥳 Congratulations! Your very own [edge-deployed](https://deno.com/deploy/docs/regions) DNS resolver is ready.<br>
-Replace `resolve.deno.dev` with your own `.deno.dev`/custom hostname!
+Replace `dnq.deno.dev` with your own `.deno.dev`/custom hostname!
 
 ## Simple Queries (`s` `&`)
 
 ### `<type>` `=` `<query>`
 ```URL
-https://resolve.deno.dev?s&a=deno.com&cname=www.apple.com
+https://dnq.deno.dev?s&a=deno.com&cname=www.apple.com
 ```
 ```json
 {
@@ -26,7 +26,7 @@ https://resolve.deno.dev?s&a=deno.com&cname=www.apple.com
 ### `<type1>` `,` `…` `=` `<query1>` `,` `…`
 
 ```URL
-https://resolve.deno.dev?s&a,aaaa=deno.com,deno.dev&mx=deno.land
+https://dnq.deno.dev?s&a,aaaa=deno.com,deno.dev&mx=deno.land
 ```
 ```json
 {
@@ -53,7 +53,7 @@ https://resolve.deno.dev?s&a,aaaa=deno.com,deno.dev&mx=deno.land
 ### `x` `=` `<IP>`<br><sup>[Reverse DNS](https://en.wikipedia.org/wiki/Reverse_DNS_lookup)
 
 ```URL
-https://resolve.deno.dev/?s&x=1.1.1.1,2606:4700:4700::1111&a,aaaa=one.one.one.one
+https://dnq.deno.dev/?s&x=1.1.1.1,2606:4700:4700::1111&a,aaaa=one.one.one.one
 ```
 ```json
 {
@@ -74,7 +74,7 @@ https://resolve.deno.dev/?s&x=1.1.1.1,2606:4700:4700::1111&a,aaaa=one.one.one.on
 ## Specify Options ([`_`](https://deno.land/api?s=Deno.ResolveDnsOptions))<br><sup><sup>`_` `:` [`Deno.ResolveDnsOptions`](https://deno.land/api?s=Deno.ResolveDnsOptions)
 
 ```URL
-https://resolve.deno.dev/?s&a=deno.com&_={"nameServer":{"ipAddr":"1.1.1.1"}}
+https://dnq.deno.dev/?s&a=deno.com&_={"nameServer":{"ipAddr":"1.1.1.1"}}
 ```
 ```
 { "A": { "deno.com": [ "34.120.54.55" ] } }
@@ -92,7 +92,7 @@ It takes [1 line to use/replace `ipinfo.io`](https://github.com/rtedge-net/resol
 ### `a`
 
 ```URL
-https://resolve.deno.dev/?a=deno.com
+https://dnq.deno.dev/?a=deno.com
 ```
 ```JS
 s
@@ -112,7 +112,7 @@ s
 ### `ip`<br><sup>inbound/your IP<br><sup>same as `ip` `=` `i`
 
 ```URL
-https://resolve.deno.dev/?ip
+https://dnq.deno.dev/?ip
 ```
 ```JS
 {
@@ -134,7 +134,7 @@ https://resolve.deno.dev/?ip
 ### `ip` `=` `o`<br><sup>outbound/service IP<br><sup>service: [Deno Deploy](https://deno.com/deploy)
 
 ```URL
-https://resolve.deno.dev/?ip=o
+https://dnq.deno.dev/?ip=o
 ```
 ```JS
 {
@@ -164,7 +164,7 @@ https://resolve.deno.dev/?ip=o
 Errors from one query does not affect others.
 
 ```URL
-https://resolve.deno.dev/?ns=x,.&ip=x,1.1.1.1&a=x,apple.com
+https://dnq.deno.dev/?ns=x,.&ip=x,1.1.1.1&a=x,apple.com
 ```
 ```JS
 {
@@ -202,7 +202,7 @@ server-timing: total;dur=6
 ```
 
 ```JS
-await fetch(`https://resolve.deno.dev/?s&a=deno.com&_={"nameServer":{"ipAddr":"1.1.1.1"}}`)
+await fetch(`https://dnq.deno.dev/?s&a=deno.com&_={"nameServer":{"ipAddr":"1.1.1.1"}}`)
   .then(async response => [ response.headers.get('dur'), await response.json() ]);
 ```
 ```JS
@@ -220,7 +220,7 @@ await fetch(`https://resolve.deno.dev/?s&a=deno.com&_={"nameServer":{"ipAddr":"1
 ### [Seoul](https://en.wikipedia.org/wiki/Seoul), [South Korea](https://en.wikipedia.org/wiki/South_Korea) tests<br><sup>[`deno/gcp-asia-northeast3`](https://deno.com/deploy/docs/regions)
 
 ```JS
-await fetch(`https://resolve.deno.dev/?s&a=deno.com&_={"nameServer":{"ipAddr":"1.1.1.1"}}`)
+await fetch(`https://dnq.deno.dev/?s&a=deno.com&_={"nameServer":{"ipAddr":"1.1.1.1"}}`)
   .then(async f => [ f.headers.get('server'), f.headers.get('dur'), await f.json() ])
 ```
 
