@@ -206,11 +206,8 @@ server-timing: total;dur=6
 ```JS
 await fetch(`https://dnq.deno.dev/?s&a=deno.com&_={"nameServer":{"ipAddr":"1.1.1.1"}}`)
   .then(async response => [ response.headers.get('dur'), await response.json() ]);
+/* result → */            [                         4  ,               {A:{…}} ]
 ```
-```JS
-                          [ 4,                                         {A:{…}} ]
-```
-
 
 
 ---
