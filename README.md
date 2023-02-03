@@ -8,7 +8,7 @@
 4. save &amp; deploy with <kbd>Ctrl</kbd>+<kbd>S</kbd>
 
 🥳 Congratulations! Your very own [edge-deployed](https://deno.com/deploy/docs/regions) DNS resolver is ready.<br>
-Replace `dnq.deno.dev` with your own `.deno.dev`/custom hostname!
+Replace **`dnq.deno.dev`** with your own `.deno.dev`/custom hostname!
 
 ## Simple Queries (`s` `&`)
 
