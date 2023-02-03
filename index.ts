@@ -64,8 +64,8 @@ serve(async (r: Request, c: ConnInfo) => { console.warn('-----------------------
   const s =    q.get('s') !== null;
   const i =    q.get('i') ===   ''; [ '_', 's', 'i' ].forEach(x => q.delete(x));
   const f = s ? resolve : rextend;
-  const          X = { "": I, I, O };
-  const m = q => X[q.toUpperCase()] ?? q; // ←                                                                                ↓
+  const          X = { I, O, i: I, o: O, "": I };
+  const m = q => X[q] ?? q; // ←                                                                                              ↓
   const Q = [...q.entries()].flatMap(([ T, Q ]) => cartesian(T.split(','), Q.split(',')).map(([ t, q ]) => [ t.toUpperCase(), m(q) ])).map(([ t, q ]) => [ t === 'X' ? 'PTR' : t, t === 'X' ? ip.ptr(q) : q ]); console.warn(Q, { i, _ });
   if   (Q.length === 0) return Response.redirect('https://apple.com', 308); // obfuscation
   if   (i)      return new Response(JS(Q, '', '  '), { headers: { _: JS(_), ...C, ...AJ, ...NS, ...AO, ...HSTS } });
