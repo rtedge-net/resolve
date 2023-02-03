@@ -55,16 +55,16 @@ serve(async (r: Request, c: ConnInfo) => { console.warn('-----------------------
   ip.info = ip.info[Deno.env.get('IPINFO_TOKEN') ? 'user' : 'curl'];
   const u = new URL(r.url);
   const p = u.pathname;
-  switch (p) {
-  case '/ipinfo.io': return fetch(`https://ipinfo.io/1.1.1.1?${new URLSearchParams({ token: Deno.env.get('IPINFO_TOKEN') })}`);
-  }
-  const C = { IP: JS({ i: c.remoteAddr.hostname, o: c.localAddr.hostname }), "IP-X": "https://ipinfo.io", ...XH };
+  switch (p) { case '/ipinfo.io': return fetch(`https://ipinfo.io/1.1.1.1?${new URLSearchParams({ token: Deno.env.get('IPINFO_TOKEN') })}`); }
+  const I = c.remoteAddr.hostname;
+  const O = c. localAddr.hostname;
+  const C = { IP: JS({ i: I, o: O }), "IP-X": "https://ipinfo.io", ...XH };
   const q = u.searchParams; //   _               _____________________
   const _ = JP(q.get('_')); // { _ = nameServer: { ipAddr, port = 53 } } https://deno.land/api@latest?s=Deno.ResolveDnsOptions
   const s =    q.get('s') !== null;
   const i =    q.get('i') ===   ''; [ '_', 's', 'i' ].forEach(x => q.delete(x));
   const f = s ? resolve : rextend;
-  const X = { ...C }; X[""] = C.I;
+  const X = { "": I, I, O };
   const m = q =>      X[q.toUpperCase()] ?? q;
   const Q = [...q.entries()].flatMap(([ T, Q ]) => cartesian(T.split(','), Q.split(',')).map(([ t, q ]) => [ t.toUpperCase(), m(q) ])).map(([ t, q ]) => [ t === 'X' ? 'PTR' : t, t === 'X' ? ip.ptr(q) : q ]); console.warn(Q, { i, _ });
   if   (Q.length === 0) return Response.redirect('https://apple.com', 308); // obfuscation
