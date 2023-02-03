@@ -1,5 +1,7 @@
 # *resolve* – edge-deployed DNS query API<br><sup>powered by [Deno.resolveDns](https://deno.land/api?s=Deno.resolveDns)
 
+![example](https://user-images.githubusercontent.com/27027/216583809-65ce615c-1a9a-4d75-9e31-51bd91b05d32.png)
+
 ## Deploy your own instance!
 
 1. open [dash.deno.com/new](https://dash.deno.com/new)
