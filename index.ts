@@ -1,5 +1,6 @@
 import { serve, ConnInfo } from "https://deno.land/std/http/server.ts";
 import { Status }          from "https://deno.land/std/http/http_status.ts";
+import { readAll }         from "https://deno.land/std/streams/read_all.ts";
 import   ip6               from "https://deno.land/x/ip6/ip6.js"; 
 
 const         CT = `content-type`;
@@ -20,7 +21,6 @@ const JS =                          JSON.stringify;
 const PF = 'fulfilled';
 const PR =  'rejected';
 
-
 const resolve = async (t, q, ...O) => {
   try       { return await (t === 'AS' ? ip.info(`AS${q.replace(/^ASN?/i, '')}`) : t === 'IP' ? q : Deno.resolveDns(q, t, ...O)); } 
   catch (e) { return { error: e.message }; }
@@ -28,6 +28,38 @@ const resolve = async (t, q, ...O) => {
 const rextend = async (t, q, ...O) => {
   const o = await resolve(t, q, ...O);
   return ip.type.has(t) && o.map ? (await Promise.all(o.map(ip.info))).reduce((x, { ip, ...O }) => (x[ip] = O, x), {}) : t === 'IP' ? ip.info(o) : o;
+};
+const registry      = (t, q, ...O) => registry[t](q, ...O).catch(e => ({ error: e.message }));
+/**/  registry.RDAP  =   (q, ...O) =>        RDAP(q);
+/**/  registry.WHOIS =   (q, ...O) =>       WHOIS(q);
+
+const getTLD = domain => domain.slice(domain.lastIndexOf('.') + 1);
+
+const WHOIS = async (domain, server, port = 43) => { let tld = getTLD(domain);                             server ??= (WHOIS.IANA.cache[tld] ??= await WHOIS(domain, WHOIS.IANA.server).then(WHOIS.IANA.find).then(server => { if (!server) throw new Error(`WHOIS server not found for TLD: ${tld}`); return server; }));
+  const                                                         conn = await Deno.connect({ hostname: server, port: 43 });
+  await                                                         conn.write(new TextEncoder().encode(domain + "\r\n"));
+  const                                  buffer = await readAll(conn);
+  const  data = new TextDecoder().decode(buffer);               conn.close();
+  return data;
+};
+/**/  WHOIS.IANA = { server: `whois.iana.org`, find: data => data?.match?.(/^whois:\s+([^\s]+)/m)?.[1] ?? '', cache: {} };
+await WHOIS('efn.kr')
+
+const RDAP = async (domain, server) => await fetch(`${RDAP.IANA.cache[getTLD(domain)] ??= await RDAP.IANA.server(getTLD(domain))}/domain/${domain}`).then(f => f.status === 404 ? ({ error: `no records`, status: f.status, ...whois.RDAP }) : f.json())
+/**/  RDAP.IANA = { cache: {},
+/**/    server: async domain => { const tld = getTLD(domain); let srv = RDAP.IANA.cache[tld]; if (srv) return srv;
+/**/      const  DNS = await fetch('https://data.iana.org/rdap/dns.json').then(f => f.json());
+/**/      const  TLD = DNS.services.find(service => service[0].includes(tld)); if (!TLD) throw new Error(`RDAP server not found for TLD: ${tld}`);
+/**/      /**/   srv = TLD[1][0]; ;
+/**/      return RDAP.IANA.cache[tld] = srv;
+/**/    },
+/**/  };
+//await RDAP('efn.com');
+
+const F = { // [ short, extended ] output
+  DENO:  [  resolve, rextend  ],
+  RDAP:  [ registry, registry ],
+  WHOIS: [ registry, registry ] 
 };
 
 const ip = { v4: q => !q.includes(':'),
@@ -67,11 +99,25 @@ serve(async (r: Request, c: ConnInfo) => { console.warn('-----------------------
   const          X = { I, O, i: I, o: O, "": I };
   const m = q => X[q] ?? q; // ←                                                                                              ↓
   const Q = [...q.entries()].flatMap(([ T, Q ]) => cartesian(T.split(','), Q.split(',')).map(([ t, q ]) => [ t.toUpperCase(), m(q) ])).map(([ t, q ]) => [ t === 'X' ? 'PTR' : t, t === 'X' ? ip.ptr(q) : q ]); console.warn(Q, { i, _ });
+
   if   (Q.length === 0) return Response.redirect('https://apple.com', 308); // obfuscation
   if   (i)      return new Response(JS(Q, '', '  '), { headers: { _: JS(_), ...C, ...AJ, ...NS, ...AO, ...HSTS } });
+  switch (u.pathname) {
+    case '/mx-confirm': return Response.json([ 'a', 'b' ]);
+  }
   try {
-    const                                  R = await Promise.all(Q.map(async ([ t, q ]) => [ t, [ q, await f(t, q, _ ?? {}).then(sort) ] ]));
-    const                              O = R.reduce((x, [ t, [ q, r ]]) => (x[t] !== undefined ? (x[t][q] = r) : (x[t] = { [q]: r }), x), {}); C.dur = performance.now() - ta; C['server-timing'] = `total;dur=${C.dur}`;
-    return             new Response(JS(O, '', '  '), { headers: { _: JS(_), ...C, ...AJ, ...NS, ...AO, ...HSTS } });
-  } catch (e) { return new Response(   e.stack,      { headers: { _: JS(_), ...C, ...TP, ...NS, ...AO, ...HSTS } }); }
+    const R = await Promise.all(
+      Q.map(async ([ t, q ]) => {
+        const                       T = F[t] ?? F.DENO;
+        const                   f = T    [s ? 0 : 1];
+        return [ t, [ q, await (f ?? resolve)(t, q, _ ?? {}).then(sort) ] ];
+      })
+    );
+    const O = R.reduce((x, [ t, [ q, r ]]) => (x[t] !== undefined ? (x[t][q] = r) : (x[t] = { [q]: r }), x), {}); 
+    C.dur = performance.now() - ta; 
+    C['server-timing'] = `total;dur=${C.dur}`;
+    /**/        return new Response(JS(O, '', '  '), { headers: { _: JS(_), ...C, ...AJ, ...NS, ...AO, ...HSTS } });
+  } catch (e) { return new Response(   e.stack,      { headers: { _: JS(_), ...C, ...TP, ...NS, ...AO, ...HSTS } }); 
+  }
+
 });
