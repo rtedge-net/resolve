@@ -157,7 +157,7 @@ https://dnq.deno.dev/?ip=o
 }
 ```
 
-## Regisry Queries
+## Registry Queries
 
 The self-contained implementation uses the latest IANA data and do not depend on third-party libraries/services.
 
