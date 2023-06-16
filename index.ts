@@ -43,13 +43,12 @@ const WHOIS = async (domain, server, port = 43) => { const tld = getTLD(domain);
   return data;
 };/**/WHOIS.IANA = { server: `whois.iana.org`, find: data => data?.match?.(/^whois:\s+([^\s]+)/m)?.[1] ?? '', cache: {} };
 
-const RDAP = async (domain, server) => { const tld = getTLD(domain); server ??= (RDAP.IANA.cache[tld] ??= await RDAP.IANA.server(tld)); const url = `${server}domain/${domain}`;
-  return await fetch(url).then(f => f.status === 404 ? ({ error: `no records`, status: f.status, domain, tld, server, url }) : f.json())
-};
-/**/  RDAP.IANA = { cache: {},
+const RDAP = async (domain, server) => { const tld = getTLD(domain);                                  server ??= (RDAP.IANA.cache[tld] ??= await RDAP.IANA.server(tld)); const url = `${server}domain/${domain}`;
+  return await fetch(url).then(f => f.status === 404 ? ({ error: `no records`, status: f.status, tld, server, url }) : f.json())
+};/**/RDAP.IANA = { cache: {},
 /**/    server: async domain => { const tld = getTLD(domain); let srv = RDAP.IANA.cache[tld]; if (srv) return srv;
-/**/      const  DNS = await fetch('https://data.iana.org/rdap/dns.json').then(f => f.json()); //console.warn(DNS);
-/**/      const  TLD = DNS.services.find(service => service[0].includes(tld)); if (!TLD) throw new Error(`RDAP server not found for TLD: ${tld}`);
+/**/      const              DNS = await fetch('https://data.iana.org/rdap/dns.json').then(f => f.json());
+/**/      const        TLD = DNS.services.find(service => service[0].includes(tld)); if (!TLD) throw new Error(`RDAP server not found for TLD: ${tld}`);
 /**/      /**/   srv = TLD[1][0]; ;
 /**/      return RDAP.IANA.cache[tld] = srv;
 /**/    },

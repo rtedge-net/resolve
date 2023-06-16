@@ -159,9 +159,12 @@ https://dnq.deno.dev/?ip=o
 
 ## Registry Queries
 
-The self-contained implementation uses the latest IANA data and do not depend on third-party libraries/services.
+The self-contained implementation uses the latest [IANA](https://www.iana.org/) data ([1],[2]) and do not depend on third-party libraries/services.
 
-### `whois` `=` `<domain>`
+[1]: https://whois.iana.org
+[2]: https://data.iana.org/rdap/dns.json
+
+### [`whois`](https://datatracker.ietf.org/doc/html/rfc3912) `=` `<domain>`
 
 ```URL
 https://dnq.deno.dev?whois=deno.dev
@@ -175,7 +178,7 @@ https://dnq.deno.dev?whois=deno.dev
 }
 ```
 
-`rdap` `=` `<domain>`<br><sup>No other `objectClassName` is supported.</sup>
+[`rdap`](https://www.icann.org/rdap) `=` `<domain>`<br><sup>No other `objectClassName` is supported.</sup>
 
 ```URL
 https://dnq.deno.dev/?rdap=deno.dev
