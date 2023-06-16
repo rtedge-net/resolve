@@ -157,7 +157,49 @@ https://dnq.deno.dev/?ip=o
 }
 ```
 
+## Regisry Queries
 
+The self-contained implementation uses the latest IANA data and do not depend on third-party libraries/services.
+
+### `whois` `=` `<domain>`
+
+```URL
+https://dnq.deno.dev?whois=deno.dev
+```
+
+```json
+{
+  "WHOIS": {
+    "deno.dev": "Domain Name: deno.dev\r\nRegistry Domain ID: 332D63186-DEV\r\nRegistrar WHOIS Server: whois.namecheap.com\r\nRegistrar URL: https://www.namecheap.com/\r\nUpdated Date: 2020-12-19T14:25:36Z\r\nCreation Date: 2019-02-28T16:00:05Z\r\nRegistry Expiry Date: 2024-02-28T16:00:05Z\r\nRegistrar: Namecheap Inc.\r\nRegistrar IANA ID: 1068\r\nRegistrar Abuse Contact Email: abuse@namecheap.com\r\nRegistrar Abuse Contact Phone: +1.6613102107\r\nDomain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited\r\nRegistry Registrant ID: REDACTED FOR PRIVACY\r\nRegistrant Name: REDACTED FOR PRIVACY\r\nRegistrant Organization: Privacy service provided by Withheld for Privacy ehf\r\nRegistrant Street: REDACTED FOR PRIVACY\r\nRegistrant Street:\r\nRegistrant City: REDACTED FOR PRIVACY\r\nRegistrant State/Province: Capital Region\r\nRegistrant Postal Code: REDACTED FOR PRIVACY\r\nRegistrant Country: IS\r\nRegistrant Phone: REDACTED FOR PRIVACY\r\nRegistrant Email: Please query the WHOIS server of the owning registrar identified in this output for information on how to contact the Registrant, Admin, or Tech contact of the queried domain name. \r\nRegistry Admin ID: REDACTED FOR PRIVACY\r\nAdmin Name: REDACTED FOR PRIVACY\r\nAdmin Organization: REDACTED FOR PRIVACY\r\nAdmin Street: REDACTED FOR PRIVACY\r\nAdmin Street:\r\nAdmin City: REDACTED FOR PRIVACY\r\nAdmin State/Province: REDACTED FOR PRIVACY\r\nAdmin Postal Code: REDACTED FOR PRIVACY\r\nAdmin Country: REDACTED FOR PRIVACY\r\nAdmin Phone: REDACTED FOR PRIVACY\r\nAdmin Email: Please query the WHOIS server of the owning registrar identified in this output for information on how to contact the Registrant, Admin, or Tech contact of the queried domain name. \r\nRegistry Tech ID: REDACTED FOR PRIVACY\r\nTech Name: REDACTED FOR PRIVACY\r\nTech Organization: REDACTED FOR PRIVACY\r\nTech Street: REDACTED FOR PRIVACY\r\nTech Street:\r\nTech City: REDACTED FOR PRIVACY\r\nTech State/Province: REDACTED FOR PRIVACY\r\nTech Postal Code: REDACTED FOR PRIVACY\r\nTech Country: REDACTED FOR PRIVACY\r\nTech Phone: REDACTED FOR PRIVACY\r\nTech Email: Please query the WHOIS server of the owning registrar identified in this output for information on how to contact the Registrant, Admin, or Tech contact of the queried domain name. \r\nRegistry Billing ID: REDACTED FOR PRIVACY\r\nBilling Name: REDACTED FOR PRIVACY\r\nBilling Organization: REDACTED FOR PRIVACY\r\nBilling Street: REDACTED FOR PRIVACY\r\nBilling Street:\r\nBilling City: REDACTED FOR PRIVACY\r\nBilling State/Province: REDACTED FOR PRIVACY\r\nBilling Postal Code: REDACTED FOR PRIVACY\r\nBilling Country: REDACTED FOR PRIVACY\r\nBilling Phone: REDACTED FOR PRIVACY\r\nBilling Email: Please query the WHOIS server of the owning registrar identified in this output for information on how to contact the Registrant, Admin, or Tech contact of the queried domain name. \r\nName Server: ns-cloud-c1.googledomains.com\r\nName Server: ns-cloud-c2.googledomains.com\r\nName Server: ns-cloud-c3.googledomains.com\r\nName Server: ns-cloud-c4.googledomains.com\r\nDNSSEC: unsigned\r\nURL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/\r\n>>> Last update of WHOIS database: 2023-06-16T21:11:56Z <<<\r\n\r\nFor more information on Whois status codes, please visit https://icann.org/epp\r\n\r\nPlease query the WHOIS server of the owning registrar identified in this\r\noutput for information on how to contact the Registrant, Admin, or Tech\r\ncontact of the queried domain name.\r\n\r\nWHOIS information is provided by Charleston Road Registry Inc. (CRR) solely\r\nfor query-based, informational purposes. By querying our WHOIS database, you\r\nare agreeing to comply with these terms\r\n(https://www.registry.google/about/whois-disclaimer.html) and acknowledge\r\nthat your information will be used in accordance with CRR's Privacy Policy\r\n(https://www.registry.google/about/privacy.html), so please read those\r\ndocuments carefully.  Any information provided is \"as is\" without any\r\nguarantee of accuracy. You may not use such information to (a) allow,\r\nenable, or otherwise support the transmission of mass unsolicited,\r\ncommercial advertising or solicitations; (b) enable high volume, automated,\r\nelectronic processes that access the systems of CRR or any ICANN-Accredited\r\nRegistrar, except as reasonably necessary to register domain names or modify\r\nexisting registrations; or (c) engage in or support unlawful behavior. CRR\r\nreserves the right to restrict or deny your access to the Whois database,\r\nand may modify these terms at any time.\r\n"
+  }
+}
+```
+
+`rdap` `=` `<domain>`<br><sup>No other `objectClassName` is supported.</sup>
+
+```URL
+https://dnq.deno.dev/?rdap=deno.dev
+```
+
+```json
+{
+  "RDAP": {
+    "deno.dev": {
+      "entitites": [{…}, …],
+      "events": [{…}, …],
+      "handle": "332D63186-DEV",
+      "ldhName": "deno.dev",
+      "links": [{…}, …],
+      "nameservers": [{…}, …],
+      "notices": [{…}, …],
+      "objectClassName": "domain",
+      "rdapConformance": ["rdap_level_0", …],
+      "secureDNS": {"delegationSigned": false, …},
+      "status": ["client transfer prohibited"],
+    }
+  }
+}
+```
 
 ---
 
@@ -208,34 +250,3 @@ await fetch(`https://dnq.deno.dev/?s&a=deno.com&_={"nameServer":{"ipAddr":"1.1.1
   .then(async response => [ response.headers.get('dur'), await response.json() ]);
 /* result → */            [                         4  ,               {A:{…}} ]
 ```
-
-
----
----
----
-
-## [Deno Deploy](https://deno.com/deploy)
-
-### [Seoul](https://en.wikipedia.org/wiki/Seoul), [South Korea](https://en.wikipedia.org/wiki/South_Korea) tests<br><sup>[`deno/gcp-asia-northeast3`](https://deno.com/deploy/docs/regions)
-
-```JS
-await fetch(`https://dnq.deno.dev/?s&a=deno.com&_={"nameServer":{"ipAddr":"1.1.1.1"}}`)
-  .then(async f => [ f.headers.get('server'), f.headers.get('dur'), await f.json() ])
-```
-
-| `_`                                                  | `dur`  | `A` | DNS service |
-| :-                                                   |    -:  |  -  | :- |
-| `_={"nameServer":{"ipAddr":"1.1.1.1"}}`              |  `4ms` | ✔️ | [Cloudflare](https://1.1.1.1/dns/)
-| `_={"nameServer":{"ipAddr":"8.8.8.8"}}`              | `40ms` | ✔️ | [Google Public](https://developers.google.com/speed/public-dns/docs/using#addresses)
-| `_={"nameServer":{"ipAddr":"2606:4700:4700::1111"}}` |  `0ms` | ❌ | [Cloudflare](https://1.1.1.1/dns/)
-| `_={"nameServer":{"ipAddr":"2001:4860:4860::8888"}}` |  `0ms` | ❌ | [Google Public](https://developers.google.com/speed/public-dns/docs/using#addresses)
-
-✔️: `{ A: { "deno.com": [ "34.120.54.55" ]                                                                  } }`<br>
-❌: `{ A: { "deno.com": { "error": "proto error: io error: Cannot assign requested address (os error 99)" } } }`  
-
-### `IPv6` support
-
-| Target                                 | `IPv4` | `IPv6`
-| :-                                     | :-: | :-:
-| Deno (Local)                           | ✔️ | ✔️
-| [Deno Deploy](https://deno.com/deploy) | ✔️ | ❌
