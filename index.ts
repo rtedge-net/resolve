@@ -1,6 +1,6 @@
 import { serve, ConnInfo } from "https://deno.land/std/http/server.ts";
 import { Status }          from "https://deno.land/std/http/http_status.ts";
-import   ip6               from "https://deno.land/x/ip6/ip6.js";
+import   ip6               from "https://deno.land/x/ip6/ip6.js"; 
 
 const         CT = `content-type`;
 const TP = { [CT]: `text/plain;charset=utf-8` };
@@ -23,7 +23,7 @@ const PR =  'rejected';
 
 const resolve = async (t, q, ...O) => {
   try       { return await (t === 'AS' ? ip.info(`AS${q.replace(/^ASN?/i, '')}`) : t === 'IP' ? q : Deno.resolveDns(q, t, ...O)); } 
-  catch (e) { return { error: e.message } }
+  catch (e) { return { error: e.message }; }
 };
 const rextend = async (t, q, ...O) => {
   const o = await resolve(t, q, ...O);
@@ -61,7 +61,7 @@ serve(async (r: Request, c: ConnInfo) => { console.warn('-----------------------
   const C = { IP: JS({ i: I, o: O }), "IP-X": "https://ipinfo.io", ...XH };
   const q = u.searchParams; //   _               _____________________
   const _ = JP(q.get('_')); // { _ = nameServer: { ipAddr, port = 53 } } https://deno.land/api@latest?s=Deno.ResolveDnsOptions
-  const s =    q.get('s') !== null;
+  const s =    q.get('s') !== null; // _={"nameServer":{"ipAddr":"1x.rtedge.net"}}
   const i =    q.get('i') ===   ''; [ '_', 's', 'i' ].forEach(x => q.delete(x));
   const f = s ? resolve : rextend;
   const          X = { I, O, i: I, o: O, "": I };
