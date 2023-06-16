@@ -41,8 +41,7 @@ const WHOIS = async (domain, server, port = 43) => { const tld = getTLD(domain);
   const                                  buffer = await readAll(conn);
   const  data = new TextDecoder().decode(buffer);               conn.close();
   return data;
-};
-/**/  WHOIS.IANA = { server: `whois.iana.org`, find: data => data?.match?.(/^whois:\s+([^\s]+)/m)?.[1] ?? '', cache: {} };
+};/**/WHOIS.IANA = { server: `whois.iana.org`, find: data => data?.match?.(/^whois:\s+([^\s]+)/m)?.[1] ?? '', cache: {} };
 
 const RDAP = async (domain, server) => { const tld = getTLD(domain); server ??= (RDAP.IANA.cache[tld] ??= await RDAP.IANA.server(tld)); const url = `${server}domain/${domain}`;
   return await fetch(url).then(f => f.status === 404 ? ({ error: `no records`, status: f.status, domain, tld, server, url }) : f.json())
