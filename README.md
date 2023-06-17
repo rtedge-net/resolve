@@ -164,7 +164,7 @@ The self-contained implementation uses the latest [IANA](https://www.iana.org/) 
 [1]: https://whois.iana.org
 [2]: https://data.iana.org/rdap/dns.json
 
-### [`whois`](https://datatracker.ietf.org/doc/html/rfc3912) `=` `<domain>`<br><sup>whois.iana.org → whois server → response
+### [`whois`](https://datatracker.ietf.org/doc/html/rfc3912) `=` `<domain>`<br><sup>whois.iana.org<br><sup>→ whois server → response</sup></sup>
 
 ```URL
 https://dnq.deno.dev?whois=deno.dev
@@ -178,7 +178,7 @@ https://dnq.deno.dev?whois=deno.dev
 }
 ```
 
-### [`rdap`](https://www.icann.org/rdap) `=` `<domain>`<br><sup>data.iana.org/rdap/dns.json → rdap server → response</sup>
+### [`rdap`](https://www.icann.org/rdap) `=` `<domain>`<br><sup>data.iana.org/rdap/dns.json<br><sup>→ rdap server → response</sup></sup>
 
 ```URL
 https://dnq.deno.dev/?rdap=deno.dev
