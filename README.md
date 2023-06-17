@@ -159,7 +159,7 @@ https://dnq.deno.dev/?ip=o
 
 ## Registry Queries
 
-The self-contained implementation uses the latest [IANA](https://www.iana.org/) data ([1],[2]) and has zero dependencies.
+The self-contained implementation uses the latest [IANA](https://www.iana.org/) data and has zero dependencies.
 
 [1]: https://whois.iana.org
 [2]: https://data.iana.org/rdap/dns.json
