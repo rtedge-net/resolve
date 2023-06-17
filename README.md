@@ -178,7 +178,7 @@ https://dnq.deno.dev?whois=deno.dev
 }
 ```
 
-### [`rdap`](https://www.icann.org/rdap) `=` `<domain>`<br><sup>[data.iana.org/rdap/dns.json](data.iana.org/rdap/dns.json) → rdap server → response</sup>
+### [`rdap`](https://www.icann.org/rdap) `=` `<domain>`<br><sup>data.iana.org/rdap/dns.json → rdap server → response</sup>
 
 ```URL
 https://dnq.deno.dev/?rdap=deno.dev
@@ -204,7 +204,7 @@ https://dnq.deno.dev/?rdap=deno.dev
 }
 ```
 
-### [`rdap`](https://www.icann.org/rdap)<br><sup>[`data.iana.org/rdap/dns.json`](https://data.iana.org/rdap/dns.json) constructoed</sup>
+### [`rdap`](https://www.icann.org/rdap)<br><sup>data.iana.org/rdap/dns.json transformed</sup>
 
 ```URL
 https://dnq.deno.dev/?rdap
