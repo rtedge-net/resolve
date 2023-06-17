@@ -159,7 +159,7 @@ https://dnq.deno.dev/?ip=o
 
 ## Registry Queries
 
-The [40-LoC, dependency-free implementation](https://github.com/rtedge-net/resolve/blob/1e30b4d6c0d11e6065ba5f648bb0d637a7ed4d33/index.ts#L4-L43) fetches data from [IANA](//iana.org) and directly queries the designated servers for
+The [40-LoC, dependency-free implementation](https://github.com/rtedge-net/resolve/blob/main/index.ts#L4-L49) fetches data from [IANA](//iana.org) and directly queries the designated servers for
 - WHOIS over port 43
 - RDAP over HTTPS
 
