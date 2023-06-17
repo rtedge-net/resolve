@@ -1,4 +1,4 @@
-# *resolve* – edge-deployed DNS query API<br><sup>powered by [Deno.resolveDns](https://deno.land/api?s=Deno.resolveDns)
+# *resolve* – DNS queries<br><sup>edge-ready via [Deno Deploy](https://deno.com/deploy)</sup>
 
 ![example](https://user-images.githubusercontent.com/27027/216583809-65ce615c-1a9a-4d75-9e31-51bd91b05d32.png)
 
