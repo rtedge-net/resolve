@@ -159,7 +159,9 @@ https://dnq.deno.dev/?ip=o
 
 ## Registry Queries
 
-The concise, dependency-free implementation fetches data from IANA and directly queries the designated servers for WHOIS over port 43 and RDAP over HTTPS.
+The [40-LoC, dependency-free implementation](https://github.com/rtedge-net/resolve/blob/1e30b4d6c0d11e6065ba5f648bb0d637a7ed4d33/index.ts#L4-L43) fetches data from [IANA](//iana.org) and directly queries the designated servers for
+- WHOIS over port 43
+- RDAP over HTTPS
 
 
 ### [`whois`](https://datatracker.ietf.org/doc/html/rfc3912) `=` `<domain>`<br><sup>whois.iana.org<br><sup>→ whois server → response</sup></sup>
