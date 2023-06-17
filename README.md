@@ -164,7 +164,7 @@ The self-contained implementation uses the latest [IANA](https://www.iana.org/) 
 [1]: https://whois.iana.org
 [2]: https://data.iana.org/rdap/dns.json
 
-### [`whois`](https://datatracker.ietf.org/doc/html/rfc3912) `=` `<domain>`
+### [`whois`](https://datatracker.ietf.org/doc/html/rfc3912) `=` `<domain>`<br><sup>`whois.iana.org` → `whois` server → response
 
 ```URL
 https://dnq.deno.dev?whois=deno.dev
@@ -178,7 +178,7 @@ https://dnq.deno.dev?whois=deno.dev
 }
 ```
 
-[`rdap`](https://www.icann.org/rdap) `=` `<domain>`<br><sup>No other `objectClassName` is supported.</sup>
+### [`rdap`](https://www.icann.org/rdap) `=` `<domain>`<br><sup>`data.iana.org/rdap/dns.json` → `rdap` server → response</sup>
 
 ```URL
 https://dnq.deno.dev/?rdap=deno.dev
@@ -203,6 +203,67 @@ https://dnq.deno.dev/?rdap=deno.dev
   }
 }
 ```
+
+### [`rdap`](https://www.icann.org/rdap)<br><sup>[`data.iana.org/rdap/dns.json`](https://data.iana.org/rdap/dns.json) constructoed</sup>
+
+```URL
+https://dnq.deno.dev/?rdap
+```
+
+```json
+{
+  "RDAP": {
+    "": {
+      "description": …,
+      "publication": …,
+      "services": {
+        …,
+        "samsung": ["https://nic.samsung:8443/rdap/"],
+        "xn--cg4bki": ["https://nic.samsung:8443/rdap/"],
+        …
+      },
+      "servers": {
+        "https://nic.samsung:8443/rdap/": [ "samsung", "xn--cg4bki" ]
+      }
+    }
+  }
+}
+```
+
+### [`tld`] `=` `<TLD>`
+
+```URL
+https://dnq.deno.dev/?tld=kr,jp,zz
+```
+
+```json
+{
+  "TLD": {
+    "kr": true,
+    "jp": true,
+    "zz": false
+  }
+}
+```
+
+### [`tld`]
+
+```URL
+https://dnq.deno.dev/?tld
+```
+
+```json
+{
+  "TLD": {
+    "": [
+      "aaa",
+      "aarp",
+      …
+    ]
+  }
+}
+```
+
 
 ---
 
