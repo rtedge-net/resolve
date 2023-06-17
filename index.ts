@@ -4,7 +4,7 @@ import   ip6               from "https://deno.land/x/ip6/ip6.js";
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import { readAll }         from "https://deno.land/std/streams/read_all.ts";
 
-const getTLD = domain => domain.slice(domain.lastIndexOf('.') + 1);
+const getTLD =       domain => domain.slice(domain.lastIndexOf('.') + 1);
 const WHOIS = async (domain, server, port = 43) => { const tld = getTLD(domain);                      server ??= (WHOIS.IANA.cache[tld] ??= await WHOIS(domain, WHOIS.IANA.server).then(WHOIS.IANA.find).then(server => { if (!server) throw new Error(`WHOIS server not found for TLD: ${tld}`); return server; }));
   const                                                         conn = await Deno.connect({ hostname: server, port: 43 });
   await                                                         conn.write(new TextEncoder().encode(domain + "\r\n"));
@@ -40,7 +40,7 @@ const RDAP = async (domain = '', server) => { const tld = getTLD(domain); if (tl
       };
       RDAP.IANA.data.url = 'https://data.iana.org/rdap/dns.json';
 
-const TLD = (q = '') => fetch('https://data.iana.org/TLD/tlds-alpha-by-domain.txt').then(f => f.text()).then(x => x.split('\n').filter(l => !l?.startsWith?.('#')).filter(l => l.trim() !== '').map(l => l.toLowerCase())).then(TLD => q === '' ? TLD : TLD.includes(q));
+const TLD = (q = '') => fetch('https://data.iana.org/TLD/tlds-alpha-by-domain.txt').then(f => f.text()).then(x => x.split('\n').filter(l => !l?.startsWith?.('#')).filter(l => l.trim() !== '').map(l => l.toLowerCase())).then(TLD => q === '' ? TLD : TLD.includes(q.toLowerCase()));
 
 //await WHOIS('efn.kr')
 //await RDAP(['deno.dev','efn.kr'][0]);
