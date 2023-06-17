@@ -204,7 +204,7 @@ https://dnq.deno.dev/?rdap=deno.dev
 }
 ```
 
-### [`rdap`](https://www.icann.org/rdap)<br><sup>data.iana.org/rdap/dns.json transformed</sup>
+### [`rdap`](https://www.icann.org/rdap)<br><sup>data.iana.org/rdap/dns.json<br><sup>transformed for convenience</sup>
 
 ```URL
 https://dnq.deno.dev/?rdap
@@ -230,11 +230,13 @@ https://dnq.deno.dev/?rdap
 }
 ```
 
-### [`tld`] `=` `<TLD>`
+### [`tld`] `=` `<TLD>`<br><sup>data.iana.org/TLD/tlds-alpha-by-domain.txt</sup>
 
 ```URL
 https://dnq.deno.dev/?tld=kr,jp,zz
 ```
+Future versions may expand the `true` case.
+
 
 ```json
 {
@@ -246,7 +248,7 @@ https://dnq.deno.dev/?tld=kr,jp,zz
 }
 ```
 
-### [`tld`]
+### [`tld`]<br><sup>data.iana.org/TLD/tlds-alpha-by-domain.txt</sup>
 
 ```URL
 https://dnq.deno.dev/?tld
