@@ -3,9 +3,9 @@
 ![example](https://user-images.githubusercontent.com/27027/216583809-65ce615c-1a9a-4d75-9e31-51bd91b05d32.png)
 
 🆕 [**Registry Queries**](#registry-queries)
-- `WHOIS`
-- `RDAP`
-- `TLD`
+- [`WHOIS`](#whois--ipasnumberdomain)
+- [`RDAP`](#rdap--ipasnumberdomain)
+- [`TLD`](#tld--tld)
 
 ## Deploy your own instance!
 
