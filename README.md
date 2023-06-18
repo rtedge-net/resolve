@@ -2,15 +2,28 @@
 
 ![example](https://user-images.githubusercontent.com/27027/216583809-65ce615c-1a9a-4d75-9e31-51bd91b05d32.png)
 
+🆕 [**Registry Queries**](#registry-queries)
+- `WHOIS`
+- `RDAP`
+- `TLD`
+
 ## Deploy your own instance!
 
-1. open [dash.deno.com/new](https://dash.deno.com/new)
-2. click `ϟ Play`
-3. paste [raw.…/index.ts](https://raw.githubusercontent.com/rtedge-net/resolve/main/index.ts)
-4. save &amp; deploy with <kbd>Ctrl</kbd>+<kbd>S</kbd>
+1. open [**dash.deno.com/new**](https://dash.deno.com/new)
+2. fork **Hello World**
+3. paste [**raw.…/index.ts**](https://raw.githubusercontent.com/rtedge-net/resolve/main/index.ts)
+4. save &amp; deploy with <kbd>**Ctrl**</kbd>+<kbd>**S**</kbd>
 
-🥳 Congratulations! Your very own [edge-deployed](https://deno.com/deploy/docs/regions) DNS resolver is ready.<br>
-Replace `dnq.deno.dev` with your own `.deno.dev`/custom hostname!
+<!-- 2. click `ϟ Play` -->
+
+🥳 Congratulations!
+
+Your very own edge-deployed DNS resolver is ready.<br>
+<sup>Replace `dnq.deno.dev` with your own `.deno.dev`/custom hostname!</sup>
+
+[**Deno Deploy Regions**](https://rtedge.net/#cf=-&aws=-&db=-&flat=&u=-&zoom=1.5&dr=5) ⬅️🗺️/🌏<br><sup>live map; <kbd>T</kbd> toggle globe view</sup>
+![image](https://github.com/rtedge-net/resolve/assets/27027/ad8a354b-367d-47db-9669-bd662d661e5d)
+
 
 ## Simple Queries (`s` `&`)
 
