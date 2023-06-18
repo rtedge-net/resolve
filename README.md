@@ -172,8 +172,8 @@ https://dnq.deno.dev/?ip=o
 
 ## Registry Queries
 
-The [40-LoC, dependency-free implementation](https://github.com/rtedge-net/resolve/blob/main/index.ts#L4-L49) fetches data from [IANA](//iana.org) and directly queries the designated servers for
-- WHOIS over port 43
+The [75-LoC, dependency-free implementation](https://github.com/rtedge-net/resolve/blob/main/index.ts#L4-L49) fetches data from [IANA](//iana.org) and directly queries the designated servers for
+- WHOIS over port `43`
 - RDAP over HTTPS
 
 ### [`whois`](https://datatracker.ietf.org/doc/html/rfc3912) `=` `<IP>`|`AS<number>`|`<domain>`
@@ -230,7 +230,7 @@ https://dnq.deno.dev/?rdap=1.1.1.1,2606:4700:4700::1111,AS13335,cloudflare.com
 ### `ip`|[`whois`](https://datatracker.ietf.org/doc/html/rfc3912)|[`rdap`](https://www.icann.org/rdap) `=` `o`<br><sup>outbound/service IP<br><sup>service: [Deno Deploy](https://deno.com/deploy)
 
 
-### `tld` `=` `<TLD>`
+### [`tld`](https://www.iana.org/domains/root/db) `=` `<TLD>`
 
 [data.iana.org/TLD/tlds-alpha-by-domain.txt](//data.iana.org/TLD/tlds-alpha-by-domain.txt)
 
@@ -250,7 +250,7 @@ Future versions may expand `true`.
 }
 ```
 
-### `tld`
+### [`tld`](https://www.iana.org/domains/root/db)
 
 [data.iana.org/TLD/tlds-alpha-by-domain.txt](//data.iana.org/TLD/tlds-alpha-by-domain.txt)
 
