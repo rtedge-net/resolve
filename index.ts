@@ -7,8 +7,8 @@ import   IP                from 'https://ai.rt.ht/ip/.js?2';
 
 const getTLD = domain => domain.slice(domain.lastIndexOf('.') + 1);
 const WHOIS = async (q, server, { port = 43 } = {}) => { 
-  const [type, q2, { s = q => q } = {}] = await RDAP.type(q); if (type === 'asn') q = `AS${q2}`; 
-  type === 'dns'
+  const [t, q2, { s = q => q } = {}] = await RDAP.type(q); if (t === 'asn') q = `AS${q2}`; 
+  t === 'dns'
     ? server ??= (WHOIS.IANA.cache[s(q)] ??= await WHOIS(q, WHOIS.IANA.server).then(WHOIS.IANA.find).then(server => { if (!server) throw new Error(`WHOIS server not found for: ${q}`); return server; }))
     : server ??=                             await WHOIS(q, WHOIS.IANA.server).then(WHOIS.IANA.find).then(server => { if (!server) throw new Error(`WHOIS server not found for: ${q}`); return server; });
   const                                                         conn = await Deno.connect({ hostname: server, port });
@@ -18,7 +18,7 @@ const WHOIS = async (q, server, { port = 43 } = {}) => {
   return data;
 };/**/WHOIS.IANA = { server: `whois.iana.org`, find: data => data?.match?.(/^whois:\s+([^\s]+)/m)?.[1] ?? '', cache: {} };
 
-const RDAP = (q, servers) => { const [type, q2, O] = RDAP.type(q) ?? []; return RDAP[type]?.(q2, servers, O); };
+const RDAP = (q, servers) => { const [t, q2, O] = RDAP.type(q) ?? []; return RDAP[t]?.(q2, servers, O); };
 RDAP.type  =  q           => { if (q === null || q === undefined) return q; const n = (!isNaN(Number(q))); if (n) return ['asn', q];
   switch (IP.v(q)) {
     case 4: return ['ipv4', q];
@@ -50,14 +50,14 @@ RDAP.IANA.dns = { cache: {},
     return srv ?? (RDAP.IANA.dns.cache[tld] ??= await RDAP.IANA.data('dns').then(dns => dns.services[tld]).then(srv => { if (srv === undefined) throw new Error(`RDAP servers not found for TLD: ${tld}`); return srv; }));
   },
 };
-const            TS = (type, find)  => ({ servers: q => RDAP.IANA.data(type).then(D => find(q, D)).then(S => { if (S === undefined) throw new Error(`RDAP servers not found for: ${q}`); return S; }), });
-RDAP.IANA.asn  = TS('asn',  (no, ASN)  => { for (const range in ASN .services) { const [s, e] = range.includes('-') ? range.split('-').map(Number) : [Number(range), Number(range)]; if (no >= s && no <= e) return ASN.services[range]; } });
+const            TS =       ( t, find) => ({ servers: q => RDAP.IANA.data(t).then(D => find(q, D)).then(S => { if (S === undefined) throw new Error(`RDAP servers not found for: ${q}`); return S; }), });
+RDAP.IANA.asn  = TS('asn',  (no, ASN ) => { for (const range in ASN .services) { const [s, e] = range.includes('-') ? range.split('-').map(Number) : [Number(range), Number(range)]; if (no >= s && no <= e) return ASN.services[range]; } });
 RDAP.IANA.ipv4 = TS('ipv4', (ip, IPv4) => { for (const range in IPv4.services) if (IP.v4.in.CIDR(ip, range)) return IPv4.services[range]; });
 RDAP.IANA.ipv6 = TS('ipv6', (ip, IPv6) => { for (const range in IPv6.services) if (IP.v6.in.CIDR(ip, range)) return IPv6.services[range]; });
-RDAP.IANA.data = async type => {
-  const iana = RDAP.IANA.data.cache[type] ??= await fetch(RDAP.IANA.data.URL[type]).then(f => f.json());
+RDAP.IANA.data = async t => {
+  const iana = RDAP.IANA.data.cache[t] ??= await fetch(RDAP.IANA.data.URL[t]).then(f => f.json());
   const data = {
-    source: { url: RDAP.IANA.data.URL[type], transformation: { company: 'Elefunc.com', department: 'RTEdge.net', construct: [ 'services' ], add: [ 'servers' ] } },
+    source: { url: RDAP.IANA.data.URL[t], transformation: { company: 'Elefunc.com', department: 'RTEdge.net', construct: [ 'services' ], add: [ 'servers' ] } },
     description: iana.description,
     publication: iana.publication, services: {}, servers: {},
     version:     iana.version,
